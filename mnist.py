@@ -11,8 +11,6 @@ print("x_test shape", x_test.shape)
 print("y_test shape", y_test.shape)
 
 
-
-
 # 咱给变成4维的
 x_train = x_train.reshape(*x_train.shape, 1).astype('float32')
 x_test = x_test.reshape(*x_test.shape, 1).astype('float32')
@@ -50,7 +48,7 @@ for layer in model.layers:
 
     if layer.name == 'conv2d_1':
         filters, biases = layer.get_weights()
-    
+
         fmin, fmax = filters.min(), filters.max()
         filters = (filters - fmin) / (fmax - fmin)
         print(filters.round(1))
