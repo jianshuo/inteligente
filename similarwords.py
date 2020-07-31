@@ -18,7 +18,7 @@ def most_similar(base_vector: Vector, words: List[Word]) -> List[Tuple[float, Wo
     words_with_distance = [(v.cosine_similarity_normalized(base_vector, w.vector), w) for w in words]
     # We want cosine similarity to be as large as possible (close to 1)
     sorted_by_distance = sorted(words_with_distance, key=lambda t: t[0], reverse=True)
-    print(f"Elapsed {time.time() - start} s")
+    # print(f"Elapsed {time.time() - start} s")
     return sorted_by_distance
 
 def print_most_similar(words: List[Word], text: str) -> None:
@@ -80,8 +80,15 @@ def print_analogy(left2: str, left1: str, right2: str, words: List[Word]) -> Non
 
 import pickle
 import os
-# words = load_words('../../data/glove/glove.6B.300D.50000.txt')
-vectorFile = '../../data/glove/sgns.wiki.word'
+
+english = True
+
+if english:
+    # vectorFile = '../../data/glove/crawl-300d-2M.vec'
+    vectorFile = '../../data/glove/glove.6B.300D.50000.txt'
+else:
+    vectorFile = '../../data/glove/sgns.wiki.word'
+
 pickleFile = vectorFile + '.nlp.pkl'
 if os.path.exists(pickleFile):
     print('Cache found', pickleFile)
@@ -89,6 +96,13 @@ if os.path.exists(pickleFile):
 else:
     words = load_words(vectorFile)
     pickle.dump(words, open(pickleFile, 'wb'))
+
+word = '上海'
+wordvec = find_word(word, words)
+print(word, '<---- vector ---->', wordvec)
+for param in wordvec.vector:
+    print(param)
+
 
 print_most_similar(words, words[190].text)
 print_most_similar(words, words[230].text)
@@ -101,7 +115,6 @@ print_most_similar(words, '优雅')
 print_most_similar(words, '思路')
 
 print("")
-
 
 print_analogy('北京', '中国' , '巴黎', words)
 print_analogy('中国', '亚洲' , '法国', words)
@@ -116,9 +129,6 @@ print_analogy('气球', '生日' , '饺子', words)
 print_analogy('高兴', '节日' , '伤心', words)
 
 
-# You'll need to download the pretrained word vectors to complete the analogies
-# below:
-# https://fasttext.cc/docs/en/english-vectors.html
 print_analogy('quick', 'quickest' , 'far', words)
 print_analogy('sushi', 'rice', 'pizza', words)
 print_analogy('Paris', 'France', 'Rome', words)
@@ -129,9 +139,7 @@ print_analogy('German', 'Opel', 'American', words)
 
 
 print_analogy('man', 'him' , 'woman', words)
-# You'll need to download the pretrained word vectors to complete the analogies
-# below:
-# https://fasttext.cc/docs/en/english-vectors.html
+
 print_analogy('quick', 'quickest' , 'far', words)
 print_analogy('sushi', 'rice', 'pizza', words)
 print_analogy('Paris', 'France', 'Rome', words)
@@ -156,7 +164,7 @@ while False:
     print_analogy(left2, left1, right2, words)
 
 # Related words (interactive)
-while True:
+while False:
     text = read_word()
     w = find_word(text, words)
     if not w:
