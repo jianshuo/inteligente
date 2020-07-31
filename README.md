@@ -1,0 +1,2 @@
+# inteligente
+AI Class
