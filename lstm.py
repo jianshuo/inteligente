@@ -282,7 +282,7 @@ model.add(Dense(y.shape[1], activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 print(model.summary())
 
-if True:
+if False:
 	# 定义checkpoint
 	filepath="./weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
 	checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')

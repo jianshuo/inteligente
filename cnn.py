@@ -9,6 +9,22 @@ import os
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 print('x_train oringal shape', x_train.shape) # (60000, 28, 28)
 
+for index in range(200,205):
+    d = x_train[index]
+    pen = ' .>*&#'
+    print('Answer is', y_train[index])
+    for i in range(28):
+        for j in range(28):
+            s = int(d[i][j] / 255 * (len(pen)-1))
+            print(pen[s], end=' ')
+        print()
+
+exit()
+
+
+
+
+
 x_train = x_train.reshape(*x_train.shape, 1).astype(np.float32)
 x_test = x_test.reshape(*x_test.shape, 1).astype(np.float32)
 
@@ -28,7 +44,7 @@ model.add(Dense(10, activation='softmax'))
 model.compile(optimizer='adam', metrics=['accuracy'], loss='sparse_categorical_crossentropy')
 
 print(model.summary())
-# model.fit(x_train, y_train, epochs=1)
+# model.fit(x_train, y_train, epochs=2)
 # model.save_weights('mnist.h5')
 
 model.load_weights('mnist.h5')

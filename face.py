@@ -1,8 +1,8 @@
 import cv2
 import os
 
-
 cv2_base_dir = os.path.dirname(os.path.abspath(cv2.__file__))
+print(cv2_base_dir)
 face_cascade = cv2.CascadeClassifier(os.path.join(cv2_base_dir, 'data', 'haarcascade_frontalface_default.xml'))
 eye_cascade = cv2.CascadeClassifier(os.path.join(cv2_base_dir, 'data', 'haarcascade_eye.xml'))
 

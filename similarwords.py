@@ -84,8 +84,8 @@ import os
 english = True
 
 if english:
-    # vectorFile = '../../data/glove/crawl-300d-2M.vec'
-    vectorFile = '../../data/glove/glove.6B.300D.50000.txt'
+    vectorFile = '../../data/glove/crawl-300d-2M.vec'
+    # vectorFile = '../../data/glove/glove.6B.300D.50000.txt'
 else:
     vectorFile = '../../data/glove/sgns.wiki.word'
 
